@@ -1,10 +1,10 @@
-//import { DatabaseModel } from './model/DatabaseModel';
+import { DatabaseModel } from './models/DatabaseModel';
 import { server } from './server';
 
 const port: number = 3333;
 console.log(`Servidor rodando em http://localhost:${3333}`);
 
- /*
+
 new DatabaseModel().testeConexao().then((resbd) => {
     if(resbd) {
         server.listen(3333, () => {
@@ -15,4 +15,3 @@ new DatabaseModel().testeConexao().then((resbd) => {
     }
 });
 
-*/
