@@ -49,8 +49,8 @@ export class Emprestimo {
     /**
      * @param idEmprestimo 
      */
-    public setIdEmrpestimo(idEmprestimo: number): void {
-        this.idEmprestimo = this.idEmprestimo;
+    public setIdEmprestimo(idEmprestimo: number): void {
+        this.idEmprestimo = idEmprestimo;
     }
 
     /**
@@ -130,7 +130,7 @@ export class Emprestimo {
      * @param statusEmprestimo 
      */
     public setSatusEmprestimo(statusEmprestimo: string): void {
-        this.statusEmprestimo = this.statusEmprestimo;
+        this.statusEmprestimo = statusEmprestimo;
     }
 
     
@@ -154,15 +154,17 @@ export class Emprestimo {
             // fazendo a consulta e guardando a resposta
             const respostaBD = await database.query(querySelectEmprestimo);
 
+            console.log(respostaBD)
+
             // usando a resposta para instanciar um objeto do tipo Emprestimo
-            respostaBD.rows.forEach((linha) => {
+            respostaBD.rows.forEach((linha: any) => {
                 // instancia (cria) objeto Empmrestimo
                 const novoEmprestimo = new Emprestimo(
-                    linha.idAluno,
-                    linha.idLivro,
-                    linha.dataEmprestimo,
-                    linha.dataDevolucao,
-                    linha.dataEmprestimo
+                    linha.id_aluno,
+                    linha.id_livro,
+                    linha.data_emprestimo,
+                    linha.data_devolucao,
+                    linha.status_emprestimo
                 );
 
                 // atribui o ID objeto
@@ -180,7 +182,5 @@ export class Emprestimo {
             return null;
         }
     }
-    setIdEmprestimo(id_emprestimo: any) {
-        throw new Error("Method not implemented.");
-    }
+    
 }

@@ -2,6 +2,8 @@ import { Request, Response } from "express";
 import { Aluno } from "../models/Aluno";
 
 interface AlunoDTO {
+    idAluno: number,
+    ra: string,
     nome: string,
     sobrenome: string,
     dataNascimento: Date,
@@ -69,6 +71,7 @@ export class AlunoController extends Aluno {
                                         alunoRecebido.email,
                                         alunoRecebido.celular
                                         );
+                                        console.log(novoAluno)
 
             // Chama a função de cadastro passando o objeto como parâmetro
             const repostaClasse = await Aluno.cadastroAluno(novoAluno);

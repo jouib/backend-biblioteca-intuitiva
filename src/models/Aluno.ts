@@ -114,7 +114,7 @@ export class Aluno {
      *
      * @returns {Date} 
      */
-    public getCor(): Date {
+    public getDataNascimento(): Date {
         return this.dataNascimento;
     }
 
@@ -197,21 +197,22 @@ export class Aluno {
 
             // usando a resposta para instanciar um objeto do tipo aluno
             respostaBD.rows.forEach((linha: {
-                id_aluno: number; nome: string; sobrenome: string; dataNascimento: Date;
-                endereco: string; email: string; celular: string; }) => {
+                id_aluno: number; nome: string; sobrenome: string; data_nascimento: Date;
+                endereco: string; email: string; celular: string; ra:string }) => {
                 // instancia (cria) objeto aluno
                 const novoAluno = new Aluno(
                     linha.nome,
                     linha.sobrenome,
-                    linha.dataNascimento,
+                    linha.data_nascimento,
                     linha.endereco,
                     linha.email,
                     linha.celular,
                 );
-
+                
                 // atribui o ID objeto
                 novoAluno.setIdAluno(linha.id_aluno);
-
+                novoAluno.setRa(linha.ra)
+                
                 // adiciona o objeto na lista
                 listaDeAlunos.push(novoAluno);
             });
@@ -245,14 +246,14 @@ export class Aluno {
     static async cadastroAluno(aluno: Aluno): Promise<boolean> {
         try {
             // query para fazer insert de um ivro no banco de dados
-            const queryInsertAluno = `INSERT INTO aluno (nome, sobrenome, dataNascimento, endereco, email, celular)
+            const queryInsertAluno = `INSERT INTO aluno (nome, sobrenome, data_nascimento, endereco, email, celular)
                                         VALUES
                                         ('${aluno.getNome()}', 
                                         '${aluno.getSobrenome()}', 
                                         '${aluno.getDataNascimento()}', 
                                         '${aluno.getEndereco()}',
-                                        '${aluno.getEmail()}'
-                                        '${aluno.getCelular}',)
+                                        '${aluno.getEmail()}',
+                                        '${aluno.getCelular()}')
                                         RETURNING id_aluno;`;
 
             // executa a query no banco e armazena a resposta
@@ -276,8 +277,5 @@ export class Aluno {
             // retorno um valor falso
             return false;
         }
-    }
-    getDataNascimento() {
-        throw new Error("Method not implemented.");
     }
 }

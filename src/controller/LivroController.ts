@@ -2,13 +2,14 @@ import { Request, Response } from "express";
 import { Livro } from "../models/Livro";
 
 interface LivroDTO {
+    idLivro: number, 
     titulo: string,
     autor: string,
     editora: string,
     anoPublicacao: string,
     isbn: string,
     quantTotal: number,
-    quantDisp: number,
+    quantDisponivel: number,
     valorAquisicao: number,
     statusLivroEmprestado: string
 }
@@ -71,7 +72,7 @@ export class LivroController extends Livro {
                                         LivroRecebido.anoPublicacao,
                                         LivroRecebido.isbn,
                                         LivroRecebido.quantTotal,
-                                        LivroRecebido.quantDisp,
+                                        LivroRecebido.quantDisponivel,
                                         LivroRecebido.valorAquisicao,
                                         LivroRecebido.statusLivroEmprestado);
 
